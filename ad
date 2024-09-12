@@ -1,0 +1,512 @@
+[33mcommit b5c0a7e399149eacad290b78cac2d3f6ec6a16f1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Ankit Rai <raia85859@gmail.com>
+Date:   Thu Sep 12 21:40:27 2024 +0545
+
+    Preprocessing
+
+[1mdiff --git a/.ipynb_checkpoints/LLM groundUP-checkpoint.ipynb b/.ipynb_checkpoints/LLM groundUP-checkpoint.ipynb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..284a80b[m
+[1m--- /dev/null[m
+[1m+++ b/.ipynb_checkpoints/LLM groundUP-checkpoint.ipynb[m	
+[36m@@ -0,0 +1,280 @@[m
+[32m+[m[32m{[m
+[32m+[m[32m "cells": [[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 2,[m
+[32m+[m[32m   "id": "537e87c3",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "Total number of character: 20479\n",[m
+[32m+[m[32m      "I HAD always thought Jack Gisburn rather a cheap genius--though a good fellow enough--so it was no \n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "with open(\"the_vedrict.txt\", \"r\", encoding=\"utf-8\") as f:\n",[m
+[32m+[m[32m    "    raw_text = f.read()\n",[m
+[32m+[m[32m    "print(\"Total number of character:\", len(raw_text))\n",[m
+[32m+[m[32m    "print(raw_text[:99])"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 3,[m
+[32m+[m[32m   "id": "a0159382",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['Hello,', ' ', 'world.', ' ', 'This,', ' ', 'is', ' ', 'a', ' ', 'test.']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "import re\n",[m
+[32m+[m[32m    "text = \"Hello, world. This, is a test.\"\n",[m
+[32m+[m[32m    "result = re.split(r'(\\s)', text)\n",[m
+[32m+[m[32m    "print(result)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 4,[m
+[32m+[m[32m   "id": "44c71ed5",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['Hello', ',', '', ' ', 'world', '.', '', ' ', 'This', ',', '', ' ', 'is', ' ', 'a', ' ', 'test', '.', '']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "result = re.split(r'([,.]|\\s)', text)\n",[m
+[32m+[m[32m    "print(result)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 6,[m
+[32m+[m[32m   "id": "30336474",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['Hello', ',', 'world', '.', 'This', ',', 'is', 'a', 'test', '.']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "result = [item for item in result if item.strip()]\n",[m
+[32m+[m[32m    "print(result)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 7,[m
+[32m+[m[32m   "id": "25376687",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['Hello', ',', 'world', '.', 'Is', 'this', '--', 'a', 'test', '?']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "text = \"Hello, world. Is this-- a test?\"\n",[m
+[32m+[m[32m    "result = re.split(r'([,.:;?_!\"()\\']|--|\\s)', text)\n",[m
+[32m+[m[32m    "result = [item.strip() for item in result if item.strip()]\n",[m
+[32m+[m[32m    "print(result)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 8,[m
+[32m+[m[32m   "id": "5280b8be",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "4649\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "preprocessed = re.split(r'([,.?_!\"()\\']|--|\\s)', raw_text)\n",[m
+[32m+[m[32m    "preprocessed = [item.strip() for item in preprocessed if item.strip()]\n",[m
+[32m+[m[32m    "print(len(preprocessed))"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 9,[m
+[32m+[m[32m   "id": "848aa695",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['I', 'HAD', 'always', 'thought', 'Jack', 'Gisburn', 'rather', 'a', 'cheap', 'genius', '--', 'though', 'a', 'good', 'fellow', 'enough', '--', 'so', 'it', 'was', 'no', 'great', 'surprise', 'to', 'me', 'to', 'hear', 'that', ',', 'in']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "print(preprocessed[:30])"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 10,[m
+[32m+[m[32m   "id": "da40c044",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "1159\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "all_words = sorted(list(set(preprocessed)))\n",[m
+[32m+[m[32m    "vocab_size = len(all_words)\n",[m
+[32m+[m[32m    "print(vocab_size)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 12,[m
+[32m+[m[32m   "id": "560b4af4",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "('!', 0)\n",[m
+[32m+[m[32m      "('\"', 1)\n",[m
+[32m+[m[32m      "(\"'\", 2)\n",[m
+[32m+[m[32m      "('(', 3)\n",[m
+[32m+[m[32m      "(')', 4)\n",[m
+[32m+[m[32m      "(',', 5)\n",[m
+[32m+[m[32m      "('--', 6)\n",[m
+[32m+[m[32m      "('.', 7)\n",[m
+[32m+[m[32m      "(':', 8)\n",[m
+[32m+[m[32m      "(';', 9)\n",[m
+[32m+[m[32m      "('?', 10)\n",[m
+[32m+[m[32m      "('A', 11)\n",[m
+[32m+[m[32m      "('Ah', 12)\n",[m
+[32m+[m[32m      "('Among', 13)\n",[m
+[32m+[m[32m      "('And', 14)\n",[m
+[32m+[m[32m      "('Are', 15)\n",[m
+[32m+[m[32m      "('Arrt', 16)\n",[m
+[32m+[m[32m      "('As', 17)\n",[m
+[32m+[m[32m      "('At', 18)\n",[m
+[32m+[m[32m      "('Be', 19)\n",[m
+[32m+[m[32m      "('Begin', 20)\n",[m
+[32m+[m[32m      "('Burlington', 21)\n",[m
+[32m+[m[32m      "('But', 22)\n",[m
+[32m+[m[32m      "('By', 23)\n",[m
+[32m+[m[32m      "('Carlo', 24)\n",[m
+[32m+[m[32m      "('Carlo;', 25)\n",[m
+[32m+[m[32m      "('Chicago', 26)\n",[m
+[32m+[m[32m      "('Claude', 27)\n",[m
+[32m+[m[32m      "('Come', 28)\n",[m
+[32m+[m[32m      "('Croft', 29)\n",[m
+[32m+[m[32m      "('Destroyed', 30)\n",[m
+[32m+[m[32m      "('Devonshire', 31)\n",[m
+[32m+[m[32m      "('Don', 32)\n",[m
+[32m+[m[32m      "('Dubarry', 33)\n",[m
+[32m+[m[32m      "('Emperors', 34)\n",[m
+[32m+[m[32m      "('Florence', 35)\n",[m
+[32m+[m[32m      "('For', 36)\n",[m
+[32m+[m[32m      "('Gallery', 37)\n",[m
+[32m+[m[32m      "('Gideon', 38)\n",[m
+[32m+[m[32m      "('Gisburn', 39)\n",[m
+[32m+[m[32m      "('Gisburns', 40)\n",[m
+[32m+[m[32m      "('Grafton', 41)\n",[m
+[32m+[m[32m      "('Greek', 42)\n",[m
+[32m+[m[32m      "('Grindle', 43)\n",[m
+[32m+[m[32m      "('Grindle:', 44)\n",[m
+[32m+[m[32m      "('Grindles', 45)\n",[m
+[32m+[m[32m      "('HAD', 46)\n",[m
+[32m+[m[32m      "('Had', 47)\n",[m
+[32m+[m[32m      "('Hang', 48)\n",[m
+[32m+[m[32m      "('Has', 49)\n",[m
+[32m+[m[32m      "('He', 50)\n",[m
+[32m+[m[32m      "('Her', 51)\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "vocab = {token:integer for integer,token in enumerate(all_words)}\n",[m
+[32m+[m[32m    "for i, item in enumerate(vocab.items()):\n",[m
+[32m+[m[32m    "    print(item)\n",[m
+[32m+[m[32m    "    if i > 50:\n",[m
+[32m+[m[32m    "        break"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": null,[m
+[32m+[m[32m   "id": "58af5226",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "class SimpleTokenizerV1:\n",[m
+[32m+[m[32m    "    def __init__(self, vocab):\n",[m
+[32m+[m[32m    "        self.str_to_int = vocab #A\n",[m
+[32m+[m[32m    "        self.int_to_str = {i:s for s,i in vocab.items()} #B\n",[m
+[32m+[m[32m    "    def encode(self, text): #C\n",[m
+[32m+[m[32m    "        preprocessed = re.split(r'([,.?_!\"()\\']|--|\\s)', text)\n",[m
+[32m+[m[32m    "        preprocessed = [item.strip() for item in preprocessed if item.strip()]\n",[m
+[32m+[m[32m    "        ids = [self.str_to_int[s] for s in preprocessed]\n",[m
+[32m+[m[32m    "        return ids\n",[m
+[32m+[m[32m    "    def decode(self, ids): #D\n",[m
+[32m+[m[32m    "        text = \" \".join([self.int_to_str[i] for i in ids])\n",[m
+[32m+[m[32m    "        text = re.sub(r'\\s+([,.?!\"()\\'])', r'\\1', text) #E\n",[m
+[32m+[m[32m    "        return text"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  }[m
+[32m+[m[32m ],[m
+[32m+[m[32m "metadata": {[m
+[32m+[m[32m  "kernelspec": {[m
+[32m+[m[32m   "display_name": "Python 3 (ipykernel)",[m
+[32m+[m[32m   "language": "python",[m
+[32m+[m[32m   "name": "python3"[m
+[32m+[m[32m  },[m
+[32m+[m[32m  "language_info": {[m
+[32m+[m[32m   "codemirror_mode": {[m
+[32m+[m[32m    "name": "ipython",[m
+[32m+[m[32m    "version": 3[m
+[32m+[m[32m   },[m
+[32m+[m[32m   "file_extension": ".py",[m
+[32m+[m[32m   "mimetype": "text/x-python",[m
+[32m+[m[32m   "name": "python",[m
+[32m+[m[32m   "nbconvert_exporter": "python",[m
+[32m+[m[32m   "pygments_lexer": "ipython3",[m
+[32m+[m[32m   "version": "3.10.4"[m
+[32m+[m[32m  }[m
+[32m+[m[32m },[m
+[32m+[m[32m "nbformat": 4,[m
+[32m+[m[32m "nbformat_minor": 5[m
+[32m+[m[32m}[m
+[1mdiff --git a/LLM groundUP.ipynb b/LLM groundUP.ipynb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6e05ec4[m
+[1m--- /dev/null[m
+[1m+++ b/LLM groundUP.ipynb[m	
+[36m@@ -0,0 +1,288 @@[m
+[32m+[m[32m{[m
+[32m+[m[32m "cells": [[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 2,[m
+[32m+[m[32m   "id": "537e87c3",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "Total number of character: 20479\n",[m
+[32m+[m[32m      "I HAD always thought Jack Gisburn rather a cheap genius--though a good fellow enough--so it was no \n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "with open(\"the_vedrict.txt\", \"r\", encoding=\"utf-8\") as f:\n",[m
+[32m+[m[32m    "    raw_text = f.read()\n",[m
+[32m+[m[32m    "print(\"Total number of character:\", len(raw_text))\n",[m
+[32m+[m[32m    "print(raw_text[:99])"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 3,[m
+[32m+[m[32m   "id": "a0159382",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['Hello,', ' ', 'world.', ' ', 'This,', ' ', 'is', ' ', 'a', ' ', 'test.']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "import re\n",[m
+[32m+[m[32m    "text = \"Hello, world. This, is a test.\"\n",[m
+[32m+[m[32m    "result = re.split(r'(\\s)', text)\n",[m
+[32m+[m[32m    "print(result)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 4,[m
+[32m+[m[32m   "id": "9cb2a777",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['Hello', ',', '', ' ', 'world', '.', '', ' ', 'This', ',', '', ' ', 'is', ' ', 'a', ' ', 'test', '.', '']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "result = re.split(r'([,.]|\\s)', text)\n",[m
+[32m+[m[32m    "print(result)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 6,[m
+[32m+[m[32m   "id": "7b9ffe21",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['Hello', ',', 'world', '.', 'This', ',', 'is', 'a', 'test', '.']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "result = [item for item in result if item.strip()]\n",[m
+[32m+[m[32m    "print(result)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 7,[m
+[32m+[m[32m   "id": "8b4283b3",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['Hello', ',', 'world', '.', 'Is', 'this', '--', 'a', 'test', '?']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "text = \"Hello, world. Is this-- a test?\"\n",[m
+[32m+[m[32m    "result = re.split(r'([,.:;?_!\"()\\']|--|\\s)', text)\n",[m
+[32m+[m[32m    "result = [item.strip() for item in result if item.strip()]\n",[m
+[32m+[m[32m    "print(result)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 8,[m
+[32m+[m[32m   "id": "eb5c1198",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "4649\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "preprocessed = re.split(r'([,.?_!\"()\\']|--|\\s)', raw_text)\n",[m
+[32m+[m[32m    "preprocessed = [item.strip() for item in preprocessed if item.strip()]\n",[m
+[32m+[m[32m    "print(len(preprocessed))"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 9,[m
+[32m+[m[32m   "id": "b34397d0",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "['I', 'HAD', 'always', 'thought', 'Jack', 'Gisburn', 'rather', 'a', 'cheap', 'genius', '--', 'though', 'a', 'good', 'fellow', 'enough', '--', 'so', 'it', 'was', 'no', 'great', 'surprise', 'to', 'me', 'to', 'hear', 'that', ',', 'in']\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "print(preprocessed[:30])"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 10,[m
+[32m+[m[32m   "id": "1b1eac52",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "1159\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "all_words = sorted(list(set(preprocessed)))\n",[m
+[32m+[m[32m    "vocab_size = len(all_words)\n",[m
+[32m+[m[32m    "print(vocab_size)"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 12,[m
+[32m+[m[32m   "id": "9f0d7e16",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "('!', 0)\n",[m
+[32m+[m[32m      "('\"', 1)\n",[m
+[32m+[m[32m      "(\"'\", 2)\n",[m
+[32m+[m[32m      "('(', 3)\n",[m
+[32m+[m[32m      "(')', 4)\n",[m
+[32m+[m[32m      "(',', 5)\n",[m
+[32m+[m[32m      "('--', 6)\n",[m
+[32m+[m[32m      "('.', 7)\n",[m
+[32m+[m[32m      "(':', 8)\n",[m
+[32m+[m[32m      "(';', 9)\n",[m
+[32m+[m[32m      "('?', 10)\n",[m
+[32m+[m[32m      "('A', 11)\n",[m
+[32m+[m[32m      "('Ah', 12)\n",[m
+[32m+[m[32m      "('Among', 13)\n",[m
+[32m+[m[32m      "('And', 14)\n",[m
+[32m+[m[32m      "('Are', 15)\n",[m
+[32m+[m[32m      "('Arrt', 16)\n",[m
+[32m+[m[32m      "('As', 17)\n",[m
+[32m+[m[32m      "('At', 18)\n",[m
+[32m+[m[32m      "('Be', 19)\n",[m
+[32m+[m[32m      "('Begin', 20)\n",[m
+[32m+[m[32m      "('Burlington', 21)\n",[m
+[32m+[m[32m      "('But', 22)\n",[m
+[32m+[m[32m      "('By', 23)\n",[m
+[32m+[m[32m      "('Carlo', 24)\n",[m
+[32m+[m[32m      "('Carlo;', 25)\n",[m
+[32m+[m[32m      "('Chicago', 26)\n",[m
+[32m+[m[32m      "('Claude', 27)\n",[m
+[32m+[m[32m      "('Come', 28)\n",[m
+[32m+[m[32m      "('Croft', 29)\n",[m
+[32m+[m[32m      "('Destroyed', 30)\n",[m
+[32m+[m[32m      "('Devonshire', 31)\n",[m
+[32m+[m[32m      "('Don', 32)\n",[m
+[32m+[m[32m      "('Dubarry', 33)\n",[m
+[32m+[m[32m      "('Emperors', 34)\n",[m
+[32m+[m[32m      "('Florence', 35)\n",[m
+[32m+[m[32m      "('For', 36)\n",[m
+[32m+[m[32m      "('Gallery', 37)\n",[m
+[32m+[m[32m      "('Gideon', 38)\n",[m
+[32m+[m[32m      "('Gisburn', 39)\n",[m
+[32m+[m[32m      "('Gisburns', 40)\n",[m
+[32m+[m[32m      "('Grafton', 4
